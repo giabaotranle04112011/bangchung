@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới thiệu bản thân</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(120deg, #89f7fe, #66a6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      transform: scale(0);
+      animation: popIn 0.8s forwards;
+    }
+
+    @keyframes popIn {
+      to { transform: scale(1); }
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 80%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      background: #6a11cb;
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    #content {
+      display: none;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #message {
+      color: red;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="quiz-card">
+    <h1>Trả lời câu hỏi để vào trang bằng chứng</h1>
+    <p>Cho hình chóp S.ABCD đáy là hình vuông cạnh 4, SA ⊥ đáy, SA = 6. Tính khoảng cách từ A đến mặt (SBC).</p>
+    <input type="text" id="answer" placeholder="Nhập đáp án (vd: ko biết)">
+    <br>
+    <button onclick="checkAnswer()">Gửi</button>
+    <p id="message"></p>
+  </div>
+
+  <div class="card" id="content">
+    <h1>Linh miu </h1>
+    <p>Trước linh có xem truyện boy love trong giờ ra chơi duma dâm , còn ở nhà nữa mà tôi xem lịch sử gg thì thấy</p>
+    <p>Còn cái mà idol tt á , là lúc đó admin vô đt linh xem ảnh thì thấy mấy cái j j á giống mấy cái bình an mà che mặt</p>
+    <p>Còn lái xe ngu á , thì là lúc ra về linh lái xe đứng giữa đường , mà dell phải về lề đường , xong ....</p>
+    <p>Với lại lái xe cứ té , nhìn cái áo đi là biết , cái ảo tưởng cái j ko á</p>
+    <p>Ngực lép á hả , nhìn đi tưởng cái bức tường có cái đinh nhô ra ko á</p>
+    <p>Rửa chén bể thật mà lười nói ra </p>
+    <p>Còn cắn người thì có cắn thật</p>
+    <p>Trước đây admin vô nhà thì cái nhà cũng tạm đc, mà vô trong phòng thì mền , gối , ko biết xếp, sàn nhà thì thấy toàn tóc , bụi , với mấy cái sách vở nữa,</p>
+    <p>Cái tủ đồ trc admin mở thì ôi , nó ấy j đâu </p>
+    <p>admin lười quá , ước có ai đó tặng admin đồ ăn vặt =)</p>
+  </div>
+
+  <script>
+function checkAnswer() {
+  const answer = document.getElementById('answer').value.trim().toLowerCase();
+
+  // Loại bỏ khoảng trắng thừa
+  const normalized = answer.replace(/\s+/g, '');
+
+  // Các cách viết hợp lệ
+  const validAnswers = ['8/3', '8phần3', '8,3', '2.6667', '2.666', '2,6667', '2,666', '2.67', '2,67', '2.7', '2,7', '2 2/3', '2 và 2/3',  '2 phan 2', '2 phần 2'];
+
+  // Kiểm tra nếu người dùng nhập số xấp xỉ
+  const numAnswer = parseFloat(answer.replace(',', '.'));
+  if (validAnswers.includes(normalized) || (Math.abs(numAnswer - 8/3) < 0.01)) {
+    document.getElementById('quiz-card').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+  } else {
+    document.getElementById('message').textContent = 'Sai rồi, thử lại nhé!';
+  }
+}
+
+  </script>
+
+</body>
+</html>
